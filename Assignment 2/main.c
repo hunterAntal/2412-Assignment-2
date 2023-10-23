@@ -221,6 +221,9 @@ void enqueue(struct PQ * pq, struct QElement e)
 {
    if(pq){
       // insert e into the list
+       // create a new node
+       struct LElement* newNode = (struct LElement*)malloc(sizeof(struct LElement));
+       
       pq->element_num = pq->element_num +1;
       }
       else
