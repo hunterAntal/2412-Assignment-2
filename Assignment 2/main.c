@@ -199,7 +199,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       } // we could add an else-clause to print an error message regarding invalid maxlen
       return pq;
     }
-
+// ---- Enqueue ---- //
     void enqueue(struct PQ * pq, struct QElement e) {
       if (pq) {
         // insert e into the list
