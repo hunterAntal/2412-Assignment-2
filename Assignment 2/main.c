@@ -174,64 +174,7 @@ void iterate(struct DLLS *L)
        x = x->next;
    }
 }
-int main(int argc, const char * argv[]) {
-   
-   int test = PQLIMIT; // test contains the number of elements with which I want to test the creation of the PQ
-   
-   myQ = build(test);
-   if(myQ == NULL){
-       printf("\nBadpointer. \n");
-       exit(-1);
-   }
-               
-   struct QElement e;
-   
-   for (int i=0; i < test; i++){
-       e.key=rand() % 127;
-       e.prio=rand() % 4;
-       enqueue(myQ, e); // Contents of e are passed to enqueue() by-value and stored in myQ->L
-       printf("After Enqueue(%d, %lu) counter takes %lu\n", e.key, e.prio, myQ->element_num);
-   }
-   iterate(myQ->L);
-   enqueue(myQ, e);
-   
-   
-   struct LElement *l = LISTSEARCH(myQ->L, 25);
-   if (l == NULL)
-   {
-       printf("\nBadpointer. \n");
-   }
-   else
-   {
-       if( l == myQ->L->sentinel )
-           printf("\n We could not find k = %d in the Queue\n", e.key);
-       else
-       {
-           printf("\n We found the list element containing %d at %p\n", l->element.key, l);
-       }
-   }
-   // Complete this section to dequeue the element that has the maximum priority. If several elements have the same max priority, then the element enqueued first should be dequeued.
-   
-   
-   for (int i=0; i < test; i++)
-   {
-       dequeue(myQ);
-       printf("After Dequeue() -> the counter takes %lu\n", myQ->element_num);
-   }
-   
-   dequeue(myQ);
-   
-   
-   printf("\n\nYou can store a maximum of %lu elements in your PQ (PQ->max_size), whereas max_size of a PQ is capped at PQLIMIT,"
-          "which is currently set to %lu in your program.\n\n\n", myQ->max_size, PQLIMIT);
-   
-   // free anything that was created with malloc!
-   // Dont forget to free all elements of the list in myQ->L before freeing L->sentinel
-   // Walk through the list and free all elements
-   // Complete
-   
-   return 0;
-}
+
            
 struct PQ* build(unsigned long maxlen)
 {
@@ -318,6 +261,62 @@ void enqueue(struct PQ * pq, struct QElement e)
                  return 0;
              }
              
-             
-             int main(){
+// main
+             int main(int argc, const char * argv[]) {
+                
+                int test = PQLIMIT; // test contains the number of elements with which I want to test the creation of the PQ
+                
+                myQ = build(test);
+                if(myQ == NULL){
+                    printf("\nBadpointer. \n");
+                    exit(-1);
+                }
+                            
+                struct QElement e;
+                
+                for (int i=0; i < test; i++){
+                    e.key=rand() % 127;
+                    e.prio=rand() % 4;
+                    enqueue(myQ, e); // Contents of e are passed to enqueue() by-value and stored in myQ->L
+                    printf("After Enqueue(%d, %lu) counter takes %lu\n", e.key, e.prio, myQ->element_num);
+                }
+                iterate(myQ->L);
+                enqueue(myQ, e);
+                
+                
+                struct LElement *l = LISTSEARCH(myQ->L, 25);
+                if (l == NULL)
+                {
+                    printf("\nBadpointer. \n");
+                }
+                else
+                {
+                    if( l == myQ->L->sentinel )
+                        printf("\n We could not find k = %d in the Queue\n", e.key);
+                    else
+                    {
+                        printf("\n We found the list element containing %d at %p\n", l->element.key, l);
+                    }
+                }
+                // Complete this section to dequeue the element that has the maximum priority. If several elements have the same max priority, then the element enqueued first should be dequeued.
+                
+                
+                for (int i=0; i < test; i++)
+                {
+                    dequeue(myQ);
+                    printf("After Dequeue() -> the counter takes %lu\n", myQ->element_num);
+                }
+                
+                dequeue(myQ);
+                
+                
+                printf("\n\nYou can store a maximum of %lu elements in your PQ (PQ->max_size), whereas max_size of a PQ is capped at PQLIMIT,"
+                       "which is currently set to %lu in your program.\n\n\n", myQ->max_size, PQLIMIT);
+                
+                // free anything that was created with malloc!
+                // Dont forget to free all elements of the list in myQ->L before freeing L->sentinel
+                // Walk through the list and free all elements
+                // Complete
+                
+                return 0;
              }
