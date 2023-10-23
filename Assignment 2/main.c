@@ -224,6 +224,11 @@ void enqueue(struct PQ * pq, struct QElement e)
        // create a new element
        struct LElement* newElement = (struct LElement*)malloc(sizeof(struct LElement));
        
+       if(newElement == NULL){
+           printf("\nenqueue()>> Memory allocation failed. Exiting.\n");
+                  exit(EXIT_FAILURE);
+       }
+       
        newElement->element = e; // set NewElement to element provided
        
        // insert the element into the list
@@ -293,7 +298,7 @@ void enqueue(struct PQ * pq, struct QElement e)
                     exit(-1);
                 }
                             
-                struct QElement e;// create a node
+                struct QElement e;// create a element
                 
                 for (int i=0; i < test; i++){
                     e.key=rand() % 127;
