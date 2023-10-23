@@ -175,7 +175,7 @@ void iterate(struct DLLS *L)
    }
 }
 
-           
+// ---- Build ---- //
 struct PQ* build(unsigned long maxlen)
 {
    struct PQ* pq = NULL;
@@ -219,7 +219,7 @@ struct PQ* build(unsigned long maxlen)
 
 void enqueue(struct PQ * pq, struct QElement e)
 {
-   if(// complete //) ){
+   if(pq){
       // insert e into the list
       pq->element_num = pq->element_num +1;
       }
@@ -227,7 +227,7 @@ void enqueue(struct PQ * pq, struct QElement e)
       {
           printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
       }
-      }
+}
       // change to return a QElement
       char dequeue(struct PQ* pq)
       {
@@ -272,7 +272,7 @@ void enqueue(struct PQ * pq, struct QElement e)
                     exit(-1);
                 }
                             
-                struct QElement e;
+                struct QElement e;// create a node
                 
                 for (int i=0; i < test; i++){
                     e.key=rand() % 127;
