@@ -14,7 +14,7 @@
 #define BADPTR (0x80 + 0x03)
 #define PQLIMIT (unsigned long) 1.20E1
 
-struct QElement
+struct QElement // also called Node
 {
     char key;
     unsigned long prio;
@@ -239,16 +239,16 @@ struct PQ* build(unsigned long maxlen)
    if ( (maxlen > 0 ) && (maxlen <= PQLIMIT ) ) {
        pq = (struct PQ*) malloc(sizeof(struct PQ));
        if(pq){
-           pq->max_size = // Complete;
-           pq->element_num = // Complete;
+           pq->max_size = maxlen;// Complete;
+           pq->element_num = 0;// Complete;
            
            if(pq->L = malloc(sizeof(struct DLLS)))
            {
-               pq->L->sentinel = // Complete;
+               pq->L->sentinel = malloc(sizeof(struct LElement));// Complete;
                if(pq->L->sentinel)
                {
-                   pq->L->sentinel->next = // Complete;
-                   pq->L->sentinel->prev = // Complete;
+                   pq->L->sentinel->next = pq->L->sentinel;// Points to itself when empty
+                   pq->L->sentinel->prev = pq->L->sentinel;// Points to itself when empty
                    pq->L->sentinel->element.key = 0;  // insignificant
                    pq->L->sentinel->element.prio = 0; // insifnificant
                }
@@ -271,7 +271,7 @@ struct PQ* build(unsigned long maxlen)
        }
        
    } // we could add an else-clause to print an error message regarding invalid maxlen
-   return // Complete;
+    return pq;
 }
 
 void enqueue(struct PQ * pq, struct QElement e)
@@ -319,3 +319,5 @@ void enqueue(struct PQ * pq, struct QElement e)
              }
              
              
+             int main(){
+             }
