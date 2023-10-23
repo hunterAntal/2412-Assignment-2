@@ -221,9 +221,27 @@ void enqueue(struct PQ * pq, struct QElement e)
 {
    if(pq){
       // insert e into the list
-       // create a new node
-       struct LElement* newNode = (struct LElement*)malloc(sizeof(struct LElement));
+       // create a new element
+       struct LElement* newElement = (struct LElement*)malloc(sizeof(struct LElement));
        
+       newElement->element = e; // set NewElement to element provided
+       
+       // insert the element into the list
+       struct LElement *current = pq->L->sentinel->next; // insert new element after sentinal
+       struct LElement *prev = pq->L->sentinel; // set prev pointer to sentinel
+       
+       while (current != pq->L->sentinel && current->element.prio <= e.prio){
+           prev = current;
+           current = current->next;
+       }
+    
+       // Update pointers
+       newElement->next = current;
+       newElement->prev = prev;
+       prev->next = newElement;
+       current->prev = newElement;
+       
+       // Update element count
       pq->element_num = pq->element_num +1;
       }
       else
