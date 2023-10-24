@@ -201,7 +201,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
     }
 // ---- Enqueue ---- //
     void enqueue(struct PQ * pq, struct QElement e) {
-      if (pq) {
+        if (pq == NULL) {
+            printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
+        }
         // insert e into the list
         // create a new element
         struct LElement * newElement = (struct LElement * ) malloc(sizeof(struct LElement));
@@ -230,9 +232,6 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
 
         // Update element count
         pq -> element_num = pq -> element_num + 1;
-      } else {
-        printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
-      }
     }
     // change to return a QElement
     char dequeue(struct PQ * pq) {
