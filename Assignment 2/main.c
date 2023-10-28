@@ -344,8 +344,11 @@ struct QElement* dequeue_max(struct PQ * pq) {
       e.prio = 7;
       enqueue(myQ, e);
 
-      dequeue_max(myQ);
-      dequeue(myQ);
+      e = *dequeue_max(myQ);
+
+      printf("key in dequeue max: %d\npriority in dequeue max: %d/n", (int) e.key, e.prio);
+      e = *dequeue(myQ);
+      printf("dequeued key: %d\ndequeued priority: %d\n", (int) e.key, e.prio);
 
       for (int i = 0; i < test; i++) {
         e.key = rand() % 127;
@@ -369,7 +372,8 @@ struct QElement* dequeue_max(struct PQ * pq) {
       // Complete this section to dequeue the element that has the maximum priority. If several elements have the same max priority, then the element enqueued first should be dequeued.
 
       for (int i = 0; i < test; i++) {
-        dequeue(myQ);
+        e = *dequeue(myQ);
+        printf("dequeued key: %d\ndequeued priority: %d\n", (int) e.key, e.prio);
         printf("After Dequeue() -> the counter takes %lu\n", myQ -> element_num);
       }
 
