@@ -224,7 +224,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
     void enqueue(struct PQ * pq, struct QElement e) { // COMPLETE
         if (pq->element_num >= pq->max_size) {
             printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
-            exit(OVERFLOW);
+            return;
         }
         // insert e into the list
         // create a new element
