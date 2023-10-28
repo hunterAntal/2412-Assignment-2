@@ -283,43 +283,42 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       }
 
 
-    char dequeue_max(struct PQ * pq) {
-      // COMPLETE THE DECLARATION OF DEQUEUE_MAX.
-      // It should dequeue the element with the maximal priority. If several
-      // elements with the same max priority exist, the element with the longest waiting time should be dequeued.
-      // After dequeuing, the element should be deleted from the list and corresponding memory deallocated.
-      if (!pq || !pq->L|| !pq->L->sentinel) {
-        printf("invalid list\n");
-        return 0;
-      }
+char dequeue_max(struct PQ * pq) {
+  // Check if the priority queue and its internal components are valid
+  if (!pq || !pq->L || !pq->L->sentinel) {
+    printf("Invalid priority queue\n");
+    return (char) BADPTR;
+  }
 
-      // underflow protection
-      if (pq->element_num == 1) {
-        printf("underflow error\n");
-        return (char) UNDERFLOW;
-      }
+  // Prevent underflow of the queue
+  if (pq->element_num == 0) {
+    printf("\ndequeue_max()>> Attempt to underflow the queue was prevented.\n");
+    return (char) UNDERFLOW;
+  }
+  // Initialize pointers to traverse the linked list and find the max priority element
+  struct LElement *current = pq->L->sentinel->next;
+  struct LElement *maxElement = current;
 
-      // temp variables to make dequeueing easier
-      struct LElement * temp = pq->L->sentinel->next;
-      struct LElement * max = pq->L->sentinel->next;
-      char data = temp->element.key;
-
-      // goes through function finding highest element enqueued first
-      while (temp->next != pq->L->sentinel) {
-          if (temp->next->element.prio >= temp->element.prio) {
-            data = temp->next->element.key;
-            max = temp->next;
-          }
-          temp = temp->next;
-      }
-      
-      // deletes current data
-      max->next->prev = max->prev;
-      max->prev->next = max->next;
-      free(max);
-
-      return data;
+  // Find the element with the maximum priority
+  while (current != pq->L->sentinel) {
+    if (current->element.prio > maxElement->element.prio) {
+      maxElement = current;
     }
+    current = current->next;
+  }
+
+  // Remove max element from the queue
+  struct LElement *ptr = LISTDELETE(pq->L, maxElement);
+  if (ptr) {
+    char temp = ptr->element.key;
+    pq->element_num--;
+    free(ptr);
+    return temp;
+  } else {
+    return (char) BADPTR;
+  }
+}
+
 
     // main
     int main(int argc,
