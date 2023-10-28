@@ -346,7 +346,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       iterate(myQ -> L);
       enqueue(myQ, e);
 
-      struct LElement * l = LISTSEARCH(myQ -> L, 25);
+      struct LElement * l = LISTSEARCH(myQ -> L, e.key);
       if (l == NULL) {
         printf("\nBadpointer. \n");
       } else {
