@@ -102,8 +102,8 @@ char dequeue(struct PQ * pq);
 char dequeue_max(struct PQ * pq);
 char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
-
 struct PQ * myQ;
+
 struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
     struct LElement * x = NULL; // creates a empty list element
     
