@@ -107,14 +107,19 @@ struct PQ * myQ;
 struct LElement * LISTSEARCH(struct DLLS * L, int k) {
     struct LElement * x;
     if (!L) {
-      // complete
+      printf("empty list\n");
+      x = NULL;
+      return x;
     } else {
       if (!L -> sentinel) {
         x = NULL;
       } else {
-        // Complete
-        while ( // complete // )
+        x = L->sentinel;
+        while (x->next != L->sentinel)
           {
+            if (x->element->key == k) { // KEEP WORKING HERE
+              break;
+            }
             x = x -> next;
           }
         }
@@ -131,9 +136,14 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       if (!(L -> sentinel))
         return;
 
-      // Complete
+      new->next = L->sentinel->next;
+      L->sentinel->next->prev = new;
+      L->sentinel->next = new;
+      new->prev = L->sentinel;
+      new->element = x;
 
     }
+    
     // The parameter L is kept for compatibility. We are not using it. x must be freed by the caller.
     struct LElement * LISTDELETE(struct DLLS * L, struct LElement * x) {
       //If the order of the evaluation is from left to right, no problem. Otherwise, access to the null pointer is possible
@@ -144,6 +154,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       }
       return x;
     }
+
     struct LElement * LISTDELETE_LAST(struct DLLS * L) {
       struct LElement * x = NULL;
       // Assuming that the expression is evaluated from left to right
@@ -203,7 +214,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
     }
 // ---- Enqueue ---- //
     void enqueue(struct PQ * pq, struct QElement e) {
-      if (pq) {
+        if (pq == NULL) {
+            printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
+        }
         // insert e into the list
         // create a new element
         struct LElement * newElement = (struct LElement * ) malloc(sizeof(struct LElement));
@@ -216,10 +229,10 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
         newElement -> element = e; // set NewElement to element provided
 
         // insert the element into the list
-        struct LElement * selected = pq -> L -> sentinel -> next; // insert new element after sentinal
+        struct LElement * selected = pq -> L -> sentinel -> next; // create a pointer to the elements after sentinel
         struct LElement * prev = pq -> L -> sentinel; // set prev pointer to sentinel
 
-        while (selected != pq -> L -> sentinel && selected -> element.prio <= e.prio) {
+        while (selected != pq -> L -> sentinel && selected -> element.prio >= e.prio) { // select is goint to loop through until it finds a spot where the prio of e is 
           prev = selected;
           selected = selected -> next;
         }
@@ -232,9 +245,6 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
 
         // Update element count
         pq -> element_num = pq -> element_num + 1;
-      } else {
-        printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
-      }
     }
     // change to return a QElement
     char dequeue(struct PQ * pq) {
