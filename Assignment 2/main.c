@@ -104,7 +104,7 @@ char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
 
 struct PQ * myQ;
-struct LElement * LISTSEARCH(struct DLLS * L, int k) {
+struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
     struct LElement * x;
     if (!L) {
       printf("empty list\n");
@@ -129,7 +129,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
 
     // change the parameter profile. X should be of type struct LElement. X should be initialized
     // by the caller (within the enqueue() subprogram)
-    void LISTINSERT(struct DLLS * L, struct QElement x) {
+    void LISTINSERT(struct DLLS * L, struct QElement x) { // COMPLETE
       struct LElement * new = NULL;
       if (!L)
         return;
@@ -154,7 +154,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       return x;
     }
 
-    struct LElement * LISTDELETE_LAST(struct DLLS * L) {
+    struct LElement * LISTDELETE_LAST(struct DLLS * L) { // IN PROGRESS
       struct LElement * x = NULL;
       // Assuming that the expression is evaluated from left to right
       if (!L || !(L -> sentinel))
@@ -176,7 +176,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
     }
 
     // ---- Build ---- //
-    struct PQ * build(unsigned long maxlen) {
+    struct PQ * build(unsigned long maxlen) { // COMPLETE
       struct PQ * pq = NULL;
       if ((maxlen > 0) && (maxlen <= PQLIMIT)) {
         pq = (struct PQ * ) malloc(sizeof(struct PQ));
@@ -211,7 +211,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       return pq;
     }
 // ---- Enqueue ---- //
-    void enqueue(struct PQ * pq, struct QElement e) {
+    void enqueue(struct PQ * pq, struct QElement e) { // COMPLETE
         if (pq == NULL) {
             printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
         }
