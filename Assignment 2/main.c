@@ -174,7 +174,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       return x;
     }
 
-    void iterate(struct DLLS * L) {
+    void iterate(struct DLLS * L) { // IN PROGRESS
       struct LElement * x;
       if (!L || !(L -> sentinel))
         exit(-1);
