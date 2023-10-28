@@ -148,10 +148,10 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
     struct LElement * LISTDELETE(struct DLLS * L, struct LElement * x) {
       //If the order of the evaluation is from left to right, no problem. Otherwise, access to the null pointer is possible
       // Please fix this so NO pointer is accessed, if it is NULL
-      if (x && x -> prev && x -> next) {
+      if (x && x -> prev && x -> next) { // removes element from list without deleting it
         x->next->prev = x->prev;
         x->prev->next = x->next;
-      } else {
+      } else { // error comment for non existing element
         printf("element does not exist\n");
         return NULL;
       }
@@ -164,10 +164,12 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       // Assuming that the expression is evaluated from left to right
       if (!L || !(L -> sentinel))
         exit(-1);
+
+        // sets x to the first non sentinel element, changes the pointers before and after;
       x = L->sentinel->next;
-        x -> prev -> next = x->next;
-        x -> next -> prev = x->prev;
-        return x;
+      x -> prev -> next = x->next;
+      x -> next -> prev = x->prev;
+      return x;
     }
 
     void iterate(struct DLLS * L) {
