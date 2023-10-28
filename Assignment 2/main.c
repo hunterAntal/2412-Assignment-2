@@ -132,19 +132,18 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
 
     // change the parameter profile. X should be of type struct LElement. X should be initialized
     // by the caller (within the enqueue() subprogram)
-    void LISTINSERT(struct DLLS * L, struct QElement x) { // COMPLETE
-      struct LElement * new = NULL;
-      if (!L)
+    void LISTINSERT(struct DLLS * L, struct QElement x) { // PENDING REVIEW
+      struct LElement * new = NULL; //  CREATE A NEW LIST ELEMENT
+      if (!L) // CHECK IF LIST IS NULL
         return;
-      if (!(L -> sentinel))
+      if (!(L -> sentinel)) // CHICK IF LIST HAS SENTINEL
         return;
 
-      new->next = L->sentinel->next;
-      L->sentinel->next->prev = new;
-      L->sentinel->next = new;
-      new->prev = L->sentinel;
-      new->element = x;
-
+      new->next = L->sentinel->next; // NEW ELEMENT POINTS TO PREVIOUS HEAD OF LIST
+      L->sentinel->next->prev = new; // SET THE OLD HEAD PREV POINTER TO NEW ELEMENT
+      L->sentinel->next = new; // SET SENTINEL NEXT POINTER TO NEW ELEMENT
+      new->prev = L->sentinel; // SET NEW ELEMENT PREV POINTER AS SENTINEL
+      new->element = x; // GIVE NEW ELEMENT THE VALUE OF X
     }
     
     // The parameter L is kept for compatibility. We are not using it. x must be freed by the caller.
