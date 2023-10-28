@@ -160,9 +160,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       // Assuming that the expression is evaluated from left to right
       if (!L || !(L -> sentinel))
         exit(-1);
-      x = // complete
-        x -> prev -> next = //complete
-        x -> next -> prev = // complete
+      x = L->sentinel->next;
+        x -> prev -> next = x->next;
+        x -> next -> prev = x->prev;
         return x;
     }
 
