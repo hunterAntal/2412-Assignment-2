@@ -257,7 +257,8 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
     }
     // change to return a QElement
     struct QElement * dequeue(struct PQ * pq) {
-      struct QElement * val;
+      struct QElement * val = malloc(sizeof(struct QElement));
+
       // COMPLETE THE CODE HERE TO DO ALL THE FOLLOWING TESTINGS:
       // Checking pq must precede checking pq->L.
       // Also, pq->L->sentinel must be checked before accessing it
