@@ -271,7 +271,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       char temp;
 
       // COMPLETE THE CODE BELOW TO PREVENT UNDERFLOW OF THE QUEUE
-      if (pq->L->sentinel->next == pq->L->sentinel)
+      if (pq->element_num == 1)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
           return (char) UNDERFLOW;
@@ -297,7 +297,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       }
 
       // underflow protection
-      if (pq->L->sentinel->next == pq->L->sentinel) {
+      if (pq->element_num == 1) {
         printf("underflow error\n");
         return (char) UNDERFLOW;
       }
