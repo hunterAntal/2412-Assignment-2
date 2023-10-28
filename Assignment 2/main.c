@@ -273,7 +273,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       if (pq->L->sentinel->next == pq->L->sentinel)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
-          return 0;
+          return (char) UNDERFLOW;
         }
         struct LElement * ptr = LISTDELETE_LAST(pq -> L);
         if (ptr) {
@@ -298,7 +298,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       // underflow protection
       if (pq->L->sentinel->next == pq->L->sentinel) {
         printf("underflow error\n");
-        return 0;
+        return (char) UNDERFLOW;
       }
 
       // temp variables to make dequeueing easier
