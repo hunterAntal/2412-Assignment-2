@@ -178,7 +178,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       struct LElement * x;
       if (!L || !(L -> sentinel))
         exit(-1);
-      x = // Complete
+        x = (struct LElement *) malloc(sizeof(struct LElement));    // CREATE MEMEORY SPACE FOR LIST ELEMENT
         while ((x != NULL) && (x != L -> sentinel)) {
           printf("\n key %d and priority %d", x -> element.key, x -> element.prio);
           x = x -> next;
