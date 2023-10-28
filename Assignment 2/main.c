@@ -254,19 +254,28 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       // Also, pq->L->sentinel must be checked before accessing it
       // Always, check a pointer before dereferencing it.
 
+      // checks that pq pq->L and sentinel are all valid before continuing
+      if (!pq || !pq->L || !pq->L->sentinel) {
+        printf("invalid list\n");
+      }
+      
+      char temp;
+
       // COMPLETE THE CODE BELOW TO PREVENT UNDERFLOW OF THE QUEUE
-      if ( // COMPLETE)
+      if (pq->L->sentinel->next == pq->L->sentinel)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
           return (char) UNDERFLOW;
         }
         struct LElement * ptr = LISTDELETE_LAST(pq -> L);
         if (ptr) {
-          // COMPLETE
+          pq->element_num--;
+          temp = ptr->element.key;
+          free(ptr);
         }
+        return temp;
       }
-      return (char) val;
-    }
+
 
     char dequeue_max(struct PQ * pq) {
       // COMPLETE THE DECLARATION OF DEQUEUE_MAX.
