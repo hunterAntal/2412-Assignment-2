@@ -151,7 +151,11 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       if (x && x -> prev && x -> next) {
         x->next->prev = x->prev;
         x->prev->next = x->next;
+      } else {
+        printf("element does not exist\n");
+        return NULL;
       }
+
       return x;
     }
 
