@@ -346,7 +346,7 @@ struct QElement* dequeue_max(struct PQ * pq) {
 
       e = *dequeue_max(myQ);
 
-      printf("key in dequeue max: %d\npriority in dequeue max: %d/n", (int) e.key, e.prio);
+      printf("key in dequeue max: %d\npriority in dequeue max: %d\n", (int) e.key, e.prio);
       e = *dequeue(myQ);
       printf("dequeued key: %d\ndequeued priority: %d\n", (int) e.key, e.prio);
 
