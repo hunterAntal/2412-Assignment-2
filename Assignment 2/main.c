@@ -136,9 +136,14 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       if (!(L -> sentinel))
         return;
 
-      // continue
+      new->next = L->sentinel->next;
+      L->sentinel->next->prev = new;
+      L->sentinel->next = new;
+      new->prev = L->sentinel;
+      new->element = x;
 
     }
+    
     // The parameter L is kept for compatibility. We are not using it. x must be freed by the caller.
     struct LElement * LISTDELETE(struct DLLS * L, struct LElement * x) {
       //If the order of the evaluation is from left to right, no problem. Otherwise, access to the null pointer is possible
@@ -148,6 +153,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       }
       return x;
     }
+
     struct LElement * LISTDELETE_LAST(struct DLLS * L) {
       struct LElement * x = NULL;
       // Assuming that the expression is evaluated from left to right
