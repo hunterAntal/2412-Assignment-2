@@ -98,7 +98,7 @@ struct LElement * LISTDELETE_LAST(struct DLLS * L);
 void iterate(struct DLLS * L);
 
 void enqueue(struct PQ * pq, struct QElement e);
-struct QElement * dequeue(struct PQ * pq);
+char dequeue(struct PQ * pq);
 char dequeue_max(struct PQ * pq);
 char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
@@ -246,8 +246,8 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
         pq->element_num++;
     }
     // change to return a QElement
-    struct QElement * dequeue(struct PQ * pq) {
-      struct QElement * val;
+    char dequeue(struct PQ * pq) {
+      char val;
       // COMPLETE THE CODE HERE TO DO ALL THE FOLLOWING TESTINGS:
       // Checking pq must precede checking pq->L.
       // Also, pq->L->sentinel must be checked before accessing it
@@ -262,13 +262,12 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       if (pq->element_num == 0)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
-          return UNDERFLOW;
+          return (char) UNDERFLOW;
         }
         struct LElement * ptr = LISTDELETE_LAST(pq -> L);
         if (ptr) {
           pq->element_num--;
-          val->key = ptr->element.key;
-          val->prio = ptr->element.prio;
+          val = ptr->element.key;
           free(ptr);
         }
         return val;
