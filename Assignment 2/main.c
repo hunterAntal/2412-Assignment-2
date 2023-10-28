@@ -266,11 +266,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       if (!pq || !pq->L || !pq->L->sentinel) {
         printf("invalid list\n");
       }
-      
-      char temp;
 
       // COMPLETE THE CODE BELOW TO PREVENT UNDERFLOW OF THE QUEUE
-      if (pq->element_num == 1)
+      if (pq->element_num == 0)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
           return (char) UNDERFLOW;
@@ -278,10 +276,10 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
         struct LElement * ptr = LISTDELETE_LAST(pq -> L);
         if (ptr) {
           pq->element_num--;
-          temp = ptr->element.key;
+          val = ptr->element.key;
           free(ptr);
         }
-        return temp;
+        return val;
       }
 
 
