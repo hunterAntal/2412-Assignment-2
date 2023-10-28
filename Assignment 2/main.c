@@ -99,7 +99,7 @@ void iterate(struct DLLS * L);
 
 void enqueue(struct PQ * pq, struct QElement e);
 char dequeue(struct PQ * pq);
-char dequeue_max(struct PQ * pq);
+struct QElement * dequeue_max(struct PQ * pq);
 char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
 struct PQ * myQ;
@@ -274,18 +274,19 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       }
 
 
-char dequeue_max(struct PQ * pq) {
+struct QElement* dequeue_max(struct PQ * pq) {
   // Check if the priority queue and its internal components are valid
   if (!pq || !pq->L || !pq->L->sentinel) {
     printf("Invalid priority queue\n");
-    return (char) BADPTR;
+    return NULL;
   }
 
   // Prevent underflow of the queue
   if (pq->element_num == 0) {
     printf("\ndequeue_max()>> Attempt to underflow the queue was prevented.\n");
-    return (char) UNDERFLOW;
+    return NULL;
   }
+
   // Initialize pointers to traverse the linked list and find the max priority element
   struct LElement *current = pq->L->sentinel->next;
   struct LElement *maxElement = current;
@@ -301,14 +302,20 @@ char dequeue_max(struct PQ * pq) {
   // Remove max element from the queue
   struct LElement *ptr = LISTDELETE(pq->L, maxElement);
   if (ptr) {
-    char temp = ptr->element.key;
+      struct QElement* temp = malloc(sizeof(struct QElement));
+    if (!temp) {
+      printf("Memory allocation failed.\n");
+      return NULL;
+    }
+    *temp = ptr->element;
     pq->element_num--;
     free(ptr);
     return temp;
   } else {
-    return (char) BADPTR;
+    return NULL;
   }
 }
+
 
 
     // main
