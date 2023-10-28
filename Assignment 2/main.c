@@ -104,7 +104,7 @@ char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
 struct PQ * myQ;
 
-struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
+struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~~~
     struct LElement * x = NULL; // creates a empty list element
     
     if (!L) { // check to see if the list is NULL
@@ -120,6 +120,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
           {
               x = x->next; // move to next element
             }
+          if(x == L->sentinel){ // if you search the whole list and end up back at the sentinel then there is no key in the list
+              printf("Key not in list\n");
+              return x = NULL; // return null to signify missing key
           }
         }
       return x; // return the element with matching key
