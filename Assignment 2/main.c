@@ -276,9 +276,14 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
           val->prio = UNDERFLOW;
           return val;
         }
+        struct LElement *ptr = LISTDELETE_LAST(pq -> L);
         
-        *val = LISTDELETE_LAST(pq -> L)->element;
-        pq->element_num--;
+        if (ptr) {
+          pq->element_num--;
+          val->key = ptr->element.key;
+          val->prio = ptr->element.prio;
+          free(ptr);
+        }
         return val;
       }
 
