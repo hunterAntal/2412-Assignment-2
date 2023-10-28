@@ -335,6 +335,16 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
 
       struct QElement e; // create a element
 
+      e.key = 5;
+      e.prio = 7;
+      enqueue(myQ, e);
+      e.key = 1;
+      e.prio = 7;
+      enqueue(myQ, e);
+
+      dequeue_max(myQ);
+      dequeue(myQ);
+
       for (int i = 0; i < test; i++) {
         e.key = rand() % 127;
         e.prio = rand() % 4;
