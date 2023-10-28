@@ -150,10 +150,14 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
     struct LElement * LISTDELETE(struct DLLS * L, struct LElement * x) {
       //If the order of the evaluation is from left to right, no problem. Otherwise, access to the null pointer is possible
       // Please fix this so NO pointer is accessed, if it is NULL
-      if (x && x -> prev && x -> next) {
+      if (x && x -> prev && x -> next) { // removes element from list without deleting it
         x->next->prev = x->prev;
         x->prev->next = x->next;
+      } else { // error comment for non existing element
+        printf("element does not exist\n");
+        return NULL;
       }
+
       return x;
     }
 
@@ -162,10 +166,12 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       // Assuming that the expression is evaluated from left to right
       if (!L || !(L -> sentinel))
         exit(-1);
-      x = // complete
-        x -> prev -> next = //complete
-        x -> next -> prev = // complete
-        return x;
+
+        // sets x to the first non sentinel element, changes the pointers before and after;
+      x = L->sentinel->next;
+      x -> prev -> next = x->next;
+      x -> next -> prev = x->prev;
+      return x;
     }
 
     void iterate(struct DLLS * L) {
@@ -256,42 +262,60 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       // Also, pq->L->sentinel must be checked before accessing it
       // Always, check a pointer before dereferencing it.
 
+      // checks that pq pq->L and sentinel are all valid before continuing
+      if (!pq || !pq->L || !pq->L->sentinel) {
+        printf("invalid list\n");
+      }
+      
+      char temp;
+
       // COMPLETE THE CODE BELOW TO PREVENT UNDERFLOW OF THE QUEUE
-      if ( // COMPLETE)
+      if (pq->L->sentinel->next == pq->L->sentinel)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
-          return (char) UNDERFLOW;
+          return 0;
         }
         struct LElement * ptr = LISTDELETE_LAST(pq -> L);
         if (ptr) {
-          // COMPLETE
+          pq->element_num--;
+          temp = ptr->element.key;
+          free(ptr);
         }
+        return temp;
       }
-      return (char) val;
-    }
+
 
     char dequeue_max(struct PQ * pq) {
       // COMPLETE THE DECLARATION OF DEQUEUE_MAX.
       // It should dequeue the element with the maximal priority. If several
       // elements with the same max priority exist, the element with the longest waiting time should be dequeued.
       // After dequeuing, the element should be deleted from the list and corresponding memory deallocated.
-      if !(PQ->L->sentinel) {
-        printf("empty list\n");
+      if (!pq || !pq->L|| !pq->L->sentinel) {
+        printf("invalid list\n");
         return 0;
       }
+
+      // underflow protection
+      if (pq->L->sentinel->next == pq->L->sentinel) {
+        printf("underflow error\n");
+        return 0;
+      }
+
+      // temp variables to make dequeueing easier
       struct LElement * temp = pq->L->sentinel->next;
       struct LElement * max = pq->L->sentinel->next;
-      char data = temp->element->key;
+      char data = temp->element.key;
 
-      while (temp->next != PQ->L->sentinel) {
-          if (temp->next->element->prio >= temp->element->prio) {
-            data = temp->next->element->key;
+      // goes through function finding highest element enqueued first
+      while (temp->next != pq->L->sentinel) {
+          if (temp->next->element.prio >= temp->element.prio) {
+            data = temp->next->element.key;
             max = temp->next;
           }
           temp = temp->next;
       }
-
-      free(temp);
+      
+      // deletes current data
       max->next->prev = max->prev;
       max->prev->next = max->next;
       free(max);
