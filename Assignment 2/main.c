@@ -301,7 +301,7 @@ char dequeue_max(struct PQ * pq) {
 
   // Find the element with the maximum priority
   while (current != pq->L->sentinel) {
-    if (current->element.prio > maxElement->element.prio) {
+    if (current->element.prio >= maxElement->element.prio) {
       maxElement = current;
     }
     current = current->next;
