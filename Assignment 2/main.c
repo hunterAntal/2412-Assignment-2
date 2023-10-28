@@ -174,11 +174,11 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       return x;
     }
 
-    void iterate(struct DLLS * L) {
+    void iterate(struct DLLS * L) { // IN PROGRESS
       struct LElement * x;
       if (!L || !(L -> sentinel))
         exit(-1);
-      x = // Complete
+        x = L->sentinel->next;  // SET X TO HEAD OF LIST
         while ((x != NULL) && (x != L -> sentinel)) {
           printf("\n key %d and priority %d", x -> element.key, x -> element.prio);
           x = x -> next;
