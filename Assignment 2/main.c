@@ -364,7 +364,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       dequeue(myQ);
 
       printf("\n\nYou can store a maximum of %lu elements in your PQ (PQ->max_size), whereas max_size of a PQ is capped at PQLIMIT,"
-        "which is currently set to %lu in your program.\n\n\n", myQ -> max_size, PQLIMIT);
+        "which is currently set to %.0lf in your program.\n\n\n", myQ -> max_size, PQLIMIT);
 
       // free anything that was created with malloc!
       // Dont forget to free all elements of the list in myQ->L before freeing L->sentinel
