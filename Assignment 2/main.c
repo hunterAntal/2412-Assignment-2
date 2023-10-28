@@ -108,24 +108,26 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
     struct LElement * x = NULL; // creates a empty list element
     
     if (!L) { // check to see if the list is NULL
-      printf("empty list\n");
-      return x;
+        printf("empty list\n");
+        return x;
         
     } else {
-      if (!L -> sentinel) {
-        x = NULL;
-      } else {
-        x = L->sentinel; // point x at head of list
-        while (x->next != L->sentinel && x->element.key != k) // loop until back at head or you find key
-          {
-              x = x->next; // move to next element
-            }
-          if(x == L->sentinel){ // if you search the whole list and end up back at the sentinel then there is no key in the list
-              printf("Key not in list\n");
-              return x = NULL; // return null to signify missing key
-          }
+        if (!L -> sentinel) {
+            x = NULL;
         }
-      return x; // return the element with matching key
+        else {
+            x = L->sentinel; // point x at head of list
+            while (x->next != L->sentinel && x->element.key != k) // loop until back at head or you find key
+            {
+                x = x->next; // move to next element
+            }
+            if(x == L->sentinel){ // if you search the whole list and end up back at the sentinel then there is no key in the list
+                printf("Key not in list\n");
+                return x = NULL; // return null to signify missing key
+            }
+        }
+    }
+        return x; // return the element with matching key
     }
 
     // change the parameter profile. X should be of type struct LElement. X should be initialized
