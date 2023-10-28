@@ -107,14 +107,19 @@ struct PQ * myQ;
 struct LElement * LISTSEARCH(struct DLLS * L, int k) {
     struct LElement * x;
     if (!L) {
-      // complete
+      printf("empty list\n");
+      x = NULL;
+      return x;
     } else {
       if (!L -> sentinel) {
         x = NULL;
       } else {
-        // Complete
-        while ( // complete // )
+        x = L->sentinel;
+        while (x->next != L->sentinel)
           {
+            if (x->element->key == k) { // KEEP WORKING HERE
+              break;
+            }
             x = x -> next;
           }
         }
@@ -131,7 +136,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) {
       if (!(L -> sentinel))
         return;
 
-      // Complete
+      // continue
 
     }
     // The parameter L is kept for compatibility. We are not using it. x must be freed by the caller.
