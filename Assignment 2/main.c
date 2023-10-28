@@ -174,11 +174,11 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       return x;
     }
 
-    void iterate(struct DLLS * L) {
+    void iterate(struct DLLS * L) { // IN PROGRESS
       struct LElement * x;
       if (!L || !(L -> sentinel))
         exit(-1);
-      x = // Complete
+        x = L->sentinel->next;  // SET X TO HEAD OF LIST
         while ((x != NULL) && (x != L -> sentinel)) {
           printf("\n key %d and priority %d", x -> element.key, x -> element.prio);
           x = x -> next;
@@ -222,9 +222,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
     }
 // ---- Enqueue ---- //
     void enqueue(struct PQ * pq, struct QElement e) { // COMPLETE
-        if (pq == NULL) {
+        if (pq->element_num >= pq->max_size) {
             printf("\nenqueue()>> Attempt to overflow the queue at %p was prevented.\n", pq);
-            exit(OVERFLOW);
+            return;
         }
         // insert e into the list
         // create a new element
