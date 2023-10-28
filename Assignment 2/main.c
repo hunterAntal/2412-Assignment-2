@@ -149,7 +149,8 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       //If the order of the evaluation is from left to right, no problem. Otherwise, access to the null pointer is possible
       // Please fix this so NO pointer is accessed, if it is NULL
       if (x && x -> prev && x -> next) {
-        // Complete
+        x->next->prev = x->prev;
+        x->prev->next = x->next;
       }
       return x;
     }
@@ -164,6 +165,7 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
         x -> next -> prev = // complete
         return x;
     }
+
     void iterate(struct DLLS * L) {
       struct LElement * x;
       if (!L || !(L -> sentinel))
@@ -271,7 +273,28 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
       // It should dequeue the element with the maximal priority. If several
       // elements with the same max priority exist, the element with the longest waiting time should be dequeued.
       // After dequeuing, the element should be deleted from the list and corresponding memory deallocated.
-      return 0;
+      if !(PQ->L->sentinel) {
+        printf("empty list\n");
+        return 0;
+      }
+      struct LElement * temp = pq->L->sentinel->next;
+      struct LElement * max = pq->L->sentinel->next;
+      char data = temp->element->key;
+
+      while (temp->next != PQ->L->sentinel) {
+          if (temp->next->element->prio >= temp->element->prio) {
+            data = temp->next->element->key;
+            max = temp->next;
+          }
+          temp = temp->next;
+      }
+
+      free(temp);
+      max->next->prev = max->prev;
+      max->prev->next = max->next;
+      free(max);
+
+      return data;
     }
 
     // main
