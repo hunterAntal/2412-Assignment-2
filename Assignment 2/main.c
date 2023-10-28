@@ -98,7 +98,7 @@ struct LElement * LISTDELETE_LAST(struct DLLS * L);
 void iterate(struct DLLS * L);
 
 void enqueue(struct PQ * pq, struct QElement e);
-char dequeue(struct PQ * pq);
+struct QElement * dequeue(struct PQ * pq);
 struct QElement * dequeue_max(struct PQ * pq);
 char find_max(struct PQ * pq);
 struct PQ * build(unsigned long maxlen);
