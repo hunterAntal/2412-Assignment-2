@@ -105,26 +105,24 @@ struct PQ * build(unsigned long maxlen);
 
 struct PQ * myQ;
 struct LElement * LISTSEARCH(struct DLLS * L, int k) { // IN PROGRESS
-    struct LElement * x;
-    if (!L) {
+    struct LElement * x = NULL; // creates a empty list element
+    
+    if (!L) { // check to see if the list is NULL
       printf("empty list\n");
-      x = NULL;
       return x;
+        
     } else {
       if (!L -> sentinel) {
         x = NULL;
       } else {
-        x = L->sentinel;
-        while (x->next != L->sentinel)
+        x = L->sentinel; // point x at head of list
+        while (x->next != L->sentinel && x->element.key != k) // loop until back at head or you find key
           {
-            if (x->element->key == k) { // KEEP WORKING HERE
-              break;
+              x = x->next; // move to next element
             }
-            x = x -> next;
           }
         }
-      }
-      return x;
+      return x; // return the element with matching key
     }
 
     // change the parameter profile. X should be of type struct LElement. X should be initialized
