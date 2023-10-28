@@ -295,7 +295,7 @@ char dequeue_max(struct PQ * pq) {
     printf("\ndequeue_max()>> Attempt to underflow the queue was prevented.\n");
     return (char) UNDERFLOW;
   }
-
+  // Initialize pointers to traverse the linked list and find the max priority element
   struct LElement *current = pq->L->sentinel->next;
   struct LElement *maxElement = current;
 
