@@ -246,8 +246,9 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
         pq->element_num++;
     }
     // change to return a QElement
-    char dequeue(struct PQ * pq) {
-      char val;
+    struct QElement * dequeue(struct PQ * pq) {
+      struct QElement * val = malloc(sizeof(struct QElement));
+
       // COMPLETE THE CODE HERE TO DO ALL THE FOLLOWING TESTINGS:
       // Checking pq must precede checking pq->L.
       // Also, pq->L->sentinel must be checked before accessing it
@@ -262,12 +263,16 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
       if (pq->element_num == 0)
         {
           printf("\ndequeue()>> Attempt to underflow the queue was prevented.\n");
-          return (char) UNDERFLOW;
+          val->key = UNDERFLOW;
+          val->prio = UNDERFLOW;
+          return val;
         }
-        struct LElement * ptr = LISTDELETE_LAST(pq -> L);
+        struct LElement *ptr = LISTDELETE_LAST(pq -> L);
+        
         if (ptr) {
           pq->element_num--;
-          val = ptr->element.key;
+          val->key = ptr->element.key;
+          val->prio = ptr->element.prio;
           free(ptr);
         }
         return val;
