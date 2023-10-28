@@ -236,20 +236,10 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
 
         newElement -> element = e; // set NewElement to element provided
 
-        // insert the element into the list
-        struct LElement * selected = pq -> L -> sentinel -> next; // create a pointer to the elements after sentinel
-        struct LElement * prev = pq -> L -> sentinel; // set prev pointer to sentinel
-
-        while (selected != pq -> L -> sentinel && selected -> element.prio >= e.prio) { // select is goint to loop through until it finds a spot where the prio of e is 
-          prev = selected;
-          selected = selected -> next;
-        }
-
         // Update pointers
-        newElement -> next = selected;
-        newElement -> prev = prev;
-        prev -> next = newElement;
-        selected -> prev = newElement;
+        newElement -> next = pq->L->sentinel->next;
+        newElement -> prev = pq->L->sentinel;
+        pq->L->sentinel->next = newElement;
 
         // Update element count
         pq -> element_num = pq -> element_num + 1;
