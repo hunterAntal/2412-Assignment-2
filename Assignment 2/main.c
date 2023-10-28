@@ -237,12 +237,13 @@ struct LElement * LISTSEARCH(struct DLLS * L, int k) { // PENDING REVIEW~~~~~~~~
         newElement -> element = e; // set NewElement to element provided
 
         // Update pointers
-        newElement -> next = pq->L->sentinel->next;
-        newElement -> prev = pq->L->sentinel;
+        newElement->next = pq->L->sentinel->next;
+        newElement->prev = pq->L->sentinel;
+        pq->L->sentinel->next->prev = newElement;  // This line was missing
         pq->L->sentinel->next = newElement;
 
         // Update element count
-        pq -> element_num = pq -> element_num + 1;
+        pq->element_num++;
     }
     // change to return a QElement
     char dequeue(struct PQ * pq) {
